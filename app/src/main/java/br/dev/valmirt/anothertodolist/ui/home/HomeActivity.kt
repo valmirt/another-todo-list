@@ -3,15 +3,15 @@ package br.dev.valmirt.anothertodolist.ui.home
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import br.dev.valmirt.anothertodolist.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity: AppCompatActivity() {
 
@@ -21,7 +21,6 @@ class HomeActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val host: NavHostFragment = supportFragmentManager
@@ -45,17 +44,16 @@ class HomeActivity: AppCompatActivity() {
     }
 
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration) {
-        // This allows NavigationUI to decide what label to show in the action bar
-        // By using appBarConfig, it will also determine whether to
-        // show the up arrow or drawer menu icon
-//        setupActionBarWithNavController(navController, appBarConfig)
-    }
+//    private fun setupActionBar(navController: NavController,
+//                               appBarConfig : AppBarConfiguration) {
+//        // This allows NavigationUI to decide what label to show in the action bar
+//        // By using appBarConfig, it will also determine whether to
+//        // show the up arrow or drawer menu icon
+////        setupActionBarWithNavController(navController, appBarConfig)
+//    }
 
     private fun setupBottomNavMenu(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNav?.setupWithNavController(navController)
+        bottom_nav_view?.setupWithNavController(navController)
     }
 
 //    private fun setupNavigationMenu(navController: NavController) {

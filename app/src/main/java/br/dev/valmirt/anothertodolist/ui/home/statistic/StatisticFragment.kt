@@ -1,4 +1,4 @@
-package br.dev.valmirt.anothertodolist.ui.statistic
+package br.dev.valmirt.anothertodolist.ui.home.statistic
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -6,7 +6,7 @@
     app:startDestination="@+id/home_dest">
     <fragment
         android:id="@+id/home_dest"
-        android:name="br.dev.valmirt.anothertodolist.ui.tasks.HomeFragment"
+        android:name="br.dev.valmirt.anothertodolist.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/statistic_dest"
-        android:name="br.dev.valmirt.anothertodolist.ui.statistic.StatisticFragment"
+        android:name="br.dev.valmirt.anothertodolist.ui.home.statistic.StatisticFragment"
         android:label="fragment_statistic"
         tools:layout="@layout/fragment_statistic" />
 </navigation>

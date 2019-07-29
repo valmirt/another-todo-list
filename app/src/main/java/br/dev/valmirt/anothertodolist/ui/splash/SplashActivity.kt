@@ -1,20 +1,21 @@
 package br.dev.valmirt.anothertodolist.ui.splash
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import br.dev.valmirt.anothertodolist.R
 
 class SplashActivity : AppCompatActivity() {
 
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(SplashViewModel::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+    }
 
-        viewModel.setHomeActivity(this)
+    override fun onSupportNavigateUp() = findNavController(R.id.my_fragment).navigateUp()
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/Theme.AppCompat"
     tools:context=".ui.home.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:theme="@style/Theme.AppCompat.DayNight" />
+        android:theme="@style/Theme.AppCompat" />
 
     <fragment
         android:id="@+id/my_nav_host_fragment"
