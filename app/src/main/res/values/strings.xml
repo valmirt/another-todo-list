@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Another To-Do List</string>
+    <string name="logo">logo</string>
+    <string name="tasks">Tasks</string>
+    <string name="statistics">Statistics</string>
+</resources>

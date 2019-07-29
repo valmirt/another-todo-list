@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/home_dest"
+        android:icon="@drawable/ic_list"
+        android:title="@string/tasks" />
+    <item
+        android:id="@id/statistic_dest"
+        android:icon="@drawable/ic_statistic"
+        android:title="@string/statistics" />
+</menu>
