@@ -12,5 +12,5 @@ data class Task (
     val title: String,
     val description: String,
     val date: String = SimpleDateFormat("yyyy/MM/dd", Locale.US).format(Date()),
-    val isComplete: Boolean
+    val isComplete: Boolean = false
 )
