@@ -18,6 +18,6 @@ val dbModule = module {
 
 val repositoryModule = module {
     single {
-        TaskRepositoryImpl(get())
+        TaskRepositoryImpl(get(), get())
     }
 }

@@ -1,5 +1,7 @@
 package br.dev.valmirt.anothertodolist.repository
 
+import android.content.Context
+import br.dev.valmirt.anothertodolist.R
 import br.dev.valmirt.anothertodolist.db.TaskDao
 import br.dev.valmirt.anothertodolist.model.Response
 import br.dev.valmirt.anothertodolist.model.Task
@@ -7,20 +9,34 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class TaskRepositoryImpl (private val taskDao: TaskDao) : TaskRepository {
+class TaskRepositoryImpl (private val context: Context,private val taskDao: TaskDao) : TaskRepository {
     override suspend fun getAllTasks(): Response<List<Task>> = withContext(Dispatchers.IO) {
         return@withContext try {
-            Response<List<Task>>(taskDao.findAll(), "")
+            val list = taskDao.findAll()
+
+            if (list.isEmpty()) {
+                Response<List<Task>>(emptyList(), context.getString(R.string.get_error))
+            } else {
+                Response<List<Task>>(list, "")
+            }
         } catch (e: Exception) {
-            Response<List<Task>>(emptyList(), e.message ?: "Something is wrong, try again later...")
+            Response<List<Task>>(emptyList(),
+                e.message ?: context.getString(R.string.default_error))
         }
     }
 
     override suspend fun getTask(id: String): Response<Task?> = withContext(Dispatchers.IO) {
         return@withContext try {
-            Response<Task?>(taskDao.findById(id), "")
+            val task = taskDao.findById(id)
+
+            if (task == null) {
+                Response<Task?>(null, context.getString(R.string.get_error))
+            } else {
+                Response<Task?>(task, "")
+            }
         } catch (e: Exception) {
-            Response<Task?>(null, e.message ?: "Something is wrong, try again later...")
+            Response<Task?>(null,
+                e.message ?: context.getString(R.string.default_error))
         }
     }
 
@@ -29,7 +45,8 @@ class TaskRepositoryImpl (private val taskDao: TaskDao) : TaskRepository {
             taskDao.save(task)
             Response<Task?>(getTask(task.id).value, "")
         } catch (e: Exception) {
-            Response<Task?>(null, e.message ?: "Something is wrong, try again later...")
+            Response<Task?>(null,
+                e.message ?: context.getString(R.string.save_error))
         }
     }
 
@@ -44,18 +61,29 @@ class TaskRepositoryImpl (private val taskDao: TaskDao) : TaskRepository {
 
     override suspend fun clearCompletedTasks(): Response<Boolean> = withContext(Dispatchers.IO) {
         taskDao.deleteAllCompleted()
-        return@withContext when (getAllTasks().value.size) {
-            0 -> Response<Boolean>(false,  "Something is wrong, try again later...")
+        return@withContext when (getAllTasks().value.filter { it.isComplete }.size) {
+            0 -> Response<Boolean>(false,  context.getString(R.string.default_error))
             else -> Response<Boolean>(true, "")
         }
     }
 
     override suspend fun deleteAllTasks(): Response<Boolean> = withContext(Dispatchers.IO) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        taskDao.deleteAll()
+        return@withContext when(getAllTasks().value.size) {
+            0 -> Response<Boolean>(false,  context.getString(R.string.delete_error))
+            else -> Response<Boolean>(true, "")
+        }
     }
 
     override suspend fun deleteTask(id: String): Response<Task?> = withContext(Dispatchers.IO) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return@withContext try {
+            val task = getTask(id).value
+
+            taskDao.deleteById(task?.id ?: "")
+            Response<Task?>(task, "")
+        } catch (e: Exception) {
+            Response<Task?>(null, e.message ?: context.getString(R.string.delete_error))
+        }
     }
 
 }

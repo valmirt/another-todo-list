@@ -3,4 +3,10 @@
     <string name="logo">logo</string>
     <string name="tasks">Tasks</string>
     <string name="statistics">Statistics</string>
+
+
+    <string name="default_error">Something is wrong, try again…</string>
+    <string name="get_error">No task found.</string>
+    <string name="save_error">Error saving task.</string>
+    <string name="delete_error">Error saving task.</string>
 </resources>
