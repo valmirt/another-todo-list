@@ -7,9 +7,14 @@ import br.dev.valmirt.anothertodolist.model.Response
 import br.dev.valmirt.anothertodolist.model.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.lang.Exception
 
-class TaskRepositoryImpl (private val context: Context,private val taskDao: TaskDao) : TaskRepository {
+class TaskRepositoryImpl: TaskRepository, KoinComponent {
+    private val context: Context by inject()
+    private val taskDao: TaskDao by inject()
+
     override suspend fun getAllTasks(): Response<List<Task>> = withContext(Dispatchers.IO) {
         return@withContext try {
             val list = taskDao.findAll()
