@@ -11,4 +11,10 @@
     <string name="delete_error">Error saving task.</string>
     <string name="no_tasks">No tasks</string>
     <string name="no_tasks_text">Nothing to do</string>
+    <string name="create_task">Create a new task</string>
+    <string name="filter_task_string">Filter task</string>
+    <string name="all_string">All</string>
+    <string name="active_string">Active</string>
+    <string name="completed_string">Completed</string>
+    <string name="settings">Settings</string>
 </resources>

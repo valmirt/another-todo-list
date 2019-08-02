@@ -10,4 +10,8 @@
     <color name="colorSplash">#925bf1</color>
 
     <color name="colorTextPrimary">#FFF</color>
+    <color name="colorTextPrimaryOp50">#80FFFFFF</color>
+
+    <color name="colorTextSecondary">#F1F1F1</color>
+    <color name="colorTextSecondaryOp50">#80F1F1F1</color>
 </resources>

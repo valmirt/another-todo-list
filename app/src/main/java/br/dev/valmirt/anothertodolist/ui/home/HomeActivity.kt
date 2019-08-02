@@ -1,7 +1,6 @@
 package br.dev.valmirt.anothertodolist.ui.home
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -29,7 +28,7 @@ class HomeActivity: AppCompatActivity() {
 
         val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home_dest, R.id.statistic_dest),
+            setOf(R.id.home_dest, R.id.statistic_dest, R.id.settings_dest),
             drawerLayout)
 
         setupActionBar(navController, appBarConfiguration)
@@ -51,11 +50,6 @@ class HomeActivity: AppCompatActivity() {
 
     private fun setupNavigationMenu(navController: NavController) {
         nav_view?.setupWithNavController(navController)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
-                || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

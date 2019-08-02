@@ -10,4 +10,8 @@
             android:icon="@drawable/ic_statistic"
             android:title="@string/statistics" />
     </group>
+    <item
+        android:id="@id/settings_dest"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 </menu>

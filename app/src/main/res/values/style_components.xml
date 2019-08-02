@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextPrimaryStyle">
+        <item name="android:textSize">@dimen/sizeTextPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+    <style name="TextSecondaryStyle">
+        <item name="android:textSize">@dimen/sizeTextSecondary</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+    <style name="TextPrimaryStyleChecked">
+        <item name="android:textSize">@dimen/sizeTextPrimary</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorTextPrimaryOp50</item>
+        <item name="android:background">@drawable/strike_trough_primary</item>
+    </style>
+    <style name="TextSecondaryStyleChecked">
+        <item name="android:textSize">@dimen/sizeTextSecondary</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorTextSecondaryOp50</item>
+        <item name="android:background">@drawable/strike_trough_secondary</item>
+    </style>
+</resources>
