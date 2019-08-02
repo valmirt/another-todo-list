@@ -27,6 +27,7 @@ class HomeActivity: AppCompatActivity() {
         val navController = host.navController
 
         val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.home_dest, R.id.statistic_dest, R.id.settings_dest),
             drawerLayout)

@@ -11,7 +11,7 @@
         android:label="@string/tasks"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/next_action"
+            android:id="@+id/home_to_statistic"
             app:destination="@id/statistic_dest"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -46,6 +46,6 @@
     <fragment
         android:id="@+id/create_dest"
         android:name="br.dev.valmirt.anothertodolist.ui.home.create.CreateFragment"
-        android:label="fragment_create"
+        android:label="New Task"
         tools:layout="@layout/fragment_create" />
 </navigation>

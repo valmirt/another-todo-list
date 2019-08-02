@@ -12,4 +12,7 @@
 
     <color name="colorTextSecondary">#808080</color>
     <color name="colorTextSecondaryOp50">#80808080</color>
+
+    <color name="colorSpinner">#000</color>
+    <color name="colorBackgroundSpinner">#FFFFFF</color>
 </resources>
