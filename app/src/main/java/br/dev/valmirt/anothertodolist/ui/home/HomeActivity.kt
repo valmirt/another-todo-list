@@ -52,7 +52,6 @@ class HomeActivity: AppCompatActivity() {
         nav_view?.setupWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
-    }
+    override fun onSupportNavigateUp(): Boolean
+            = findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
 }

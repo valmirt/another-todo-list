@@ -20,14 +20,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <nav-graph android:value="@navigation/splash_navigation" />
+            <nav-graph android:value="@navigation/navigation_splash" />
         </activity>
 
         <activity
             android:name=".ui.home.HomeActivity"
             android:theme="@style/MyTheme.NoActionBar">
 
-            <nav-graph android:value="@navigation/mobile_navigation" />
+            <nav-graph android:value="@navigation/navigation_home" />
         </activity>
     </application>
 

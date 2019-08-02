@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.add_task -> {
-//                findNavController().navigate(R.id.home_to_settings)
+                findNavController().navigate(R.id.home_to_create)
                 true
             }
             R.id.filter_task -> {

@@ -40,5 +40,5 @@
         android:layout_below="@id/toolbar"
         android:layout_toEndOf="@id/nav_view"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/mobile_navigation" />
+        app:navGraph="@navigation/navigation_home" />
 </RelativeLayout>

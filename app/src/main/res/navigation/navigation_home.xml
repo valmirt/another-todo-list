@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/navigation_home"
     android:label="Tasks"
     app:startDestination="@+id/home_dest">
     <fragment
@@ -24,6 +24,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_create"
+            app:destination="@+id/create_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -36,4 +43,9 @@
         android:name="br.dev.valmirt.anothertodolist.ui.home.settings.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/create_dest"
+        android:name="br.dev.valmirt.anothertodolist.ui.home.create.CreateFragment"
+        android:label="fragment_create"
+        tools:layout="@layout/fragment_create" />
 </navigation>
