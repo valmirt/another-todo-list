@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Dark Base application theme. -->
     <style name="MyTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
@@ -11,5 +11,9 @@
     <style name="MyTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="BottomNavigationTheme" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorAccent</item>
     </style>
 </resources>
