@@ -9,6 +9,7 @@ import br.dev.valmirt.anothertodolist.R
 
 class HomeFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
