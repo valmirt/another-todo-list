@@ -3,6 +3,8 @@ package br.dev.valmirt.anothertodolist.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.dev.valmirt.anothertodolist.model.Filter
+import br.dev.valmirt.anothertodolist.model.Filter.*
 import br.dev.valmirt.anothertodolist.model.Task
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
 import kotlinx.coroutines.Job
@@ -16,18 +18,19 @@ class HomeViewModel : ViewModel(), KoinComponent {
 
     val alertMessage: MutableLiveData<String> = MutableLiveData()
 
-    val tasks: MutableLiveData<List<Task>> by lazy {
-        MutableLiveData<List<Task>>().also {
-            updateTaskList()
-        }
-    }
+    val tasks: MutableLiveData<List<Task>> = MutableLiveData()
 
     val spinner: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun updateTaskList() {
+    fun updateTaskList(filter: Filter = ALL) {
         launchDataLoad {
             val response = taskRepository.getAllTasks()
-            tasks.value = response.value
+
+            tasks.value = when(filter) {
+                ALL -> response.value
+                ACTIVE -> response.value.filter { !it.isComplete }
+                COMPLETED -> response.value.filter { it.isComplete }
+            }
 
             if(response.message.isNotEmpty())
                 alertMessage.value = response.message

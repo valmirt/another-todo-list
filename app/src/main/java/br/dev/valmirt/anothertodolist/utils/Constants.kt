@@ -5,5 +5,7 @@ class Constants {
     companion object {
         const val DARK_THEME = "dt"
         const val SELECTED_THEME = "tc"
+        const val LAST_LIST = "ll"
+        const val SELECTED_TASK = "this"
     }
 }

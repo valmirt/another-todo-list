@@ -17,4 +17,5 @@
     <string name="active_string">Active</string>
     <string name="completed_string">Completed</string>
     <string name="settings">Settings</string>
+    <string name="detail">Task detail</string>
 </resources>

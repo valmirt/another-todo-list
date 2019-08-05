@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sizeTextPrimary">16sp</dimen>
+    <dimen name="paddingReference">8dp</dimen>
     <dimen name="sizeTextSecondary">12sp</dimen>
+    <dimen name="sizeTextReference">14sp</dimen>
+    <dimen name="sizeTextPrimary">16sp</dimen>
 </resources>

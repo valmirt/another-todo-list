@@ -31,6 +31,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_detail"
+            app:destination="@id/detail_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -48,4 +55,9 @@
         android:name="br.dev.valmirt.anothertodolist.ui.home.create.CreateFragment"
         android:label="New Task"
         tools:layout="@layout/fragment_create" />
+    <fragment
+        android:id="@+id/detail_dest"
+        android:name="br.dev.valmirt.anothertodolist.ui.home.detail.DetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

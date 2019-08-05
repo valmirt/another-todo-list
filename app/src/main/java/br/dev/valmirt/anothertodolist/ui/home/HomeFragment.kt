@@ -1,5 +1,7 @@
 package br.dev.valmirt.anothertodolist.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
@@ -11,12 +13,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.dev.valmirt.anothertodolist.R
+import br.dev.valmirt.anothertodolist.model.Filter
 import br.dev.valmirt.anothertodolist.model.Filter.*
+import br.dev.valmirt.anothertodolist.utils.Constants.Companion.LAST_LIST
+import br.dev.valmirt.anothertodolist.utils.Constants.Companion.SELECTED_TASK
+import br.dev.valmirt.anothertodolist.utils.toModelFilter
+import br.dev.valmirt.anothertodolist.utils.toTranslatedString
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    private var filter = ALL
+    private lateinit var filter: Filter
+
+    private val preferences: SharedPreferences? by lazy {
+        context?.getSharedPreferences(LAST_LIST, Context.MODE_PRIVATE)
+    }
 
     private val adapterTask = HomeAdapter()
 
@@ -29,9 +40,16 @@ class HomeFragment : Fragment() {
 
         adapterTask.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
             override fun onClick(position: Int, view: View?) {
-                //Detail task
+                val bundle = Bundle()
+                bundle.putInt(SELECTED_TASK, position)
+                findNavController().navigate(R.id.home_to_create, bundle)
             }
         })
+
+        filter = preferences?.getString(LAST_LIST, ALL.toString())
+            ?.toModelFilter() ?: ALL
+
+        viewModel.updateTaskList(filter)
     }
 
     override fun onCreateView(
@@ -50,6 +68,8 @@ class HomeFragment : Fragment() {
         task_list.setHasFixedSize(true)
         task_list.adapter = adapterTask
 
+        title_list.text = filter.toTranslatedString(context)
+
 
         context?.let {
             refresh_home.setColorSchemeColors(
@@ -63,7 +83,7 @@ class HomeFragment : Fragment() {
 
 
         refresh_home.setOnRefreshListener {
-            viewModel.updateTaskList()
+            viewModel.updateTaskList(filter)
         }
 
         viewModel.tasks.observe(this, Observer {
@@ -115,7 +135,13 @@ class HomeFragment : Fragment() {
                     R.id.completed -> COMPLETED
                     else -> ALL
                 }
-                //Call function to reload tasks
+                title_list.text = filter.toTranslatedString(context)
+
+                val editor = preferences?.edit()
+                editor?.putString(LAST_LIST, filter.toString())
+                editor?.apply()
+
+                viewModel.updateTaskList(filter)
                 true
             }
 

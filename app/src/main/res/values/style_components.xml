@@ -21,4 +21,10 @@
         <item name="android:textColor">@color/colorTextSecondaryOp50</item>
         <item name="android:background">@drawable/strike_trough_secondary</item>
     </style>
+    <style name="TextReference">
+        <item name="android:textSize">@dimen/sizeTextReference</item>
+        <item name="android:padding">@dimen/paddingReference</item>
+        <item name="android:textColor">@color/colorSplash</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
