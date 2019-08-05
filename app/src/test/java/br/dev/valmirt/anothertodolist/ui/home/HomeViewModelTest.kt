@@ -1,9 +1,6 @@
 package br.dev.valmirt.anothertodolist.ui.home
 
 import br.dev.valmirt.anothertodolist.di.fakeRepo
-import br.dev.valmirt.anothertodolist.model.Task
-import br.dev.valmirt.anothertodolist.repository.FakeRepository
-import br.dev.valmirt.anothertodolist.utils.LiveDataTestUtil
 import br.dev.valmirt.anothertodolist.utils.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -40,10 +37,11 @@ class HomeViewModelTest: KoinTest {
 //
 //        viewModel.updateTaskList()
 //        // Then progress indicator is shown
-//        assertThat(LiveDataTestUtil.getValue(viewModel.spinner), `is`(true))
+//        assertThat(viewModel.spinner.value, `is`(true))
 //
 //        // Execute pending coroutines actions
 //        mainCoroutineRule.resumeDispatcher()
+//        delay(1000)
 //
 //        // Then progress indicator is hidden
 //        assertThat(viewModel.spinner.value, `is`(false))
