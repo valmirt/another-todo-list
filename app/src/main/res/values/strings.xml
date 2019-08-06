@@ -22,4 +22,10 @@
     <string name="task_description">Task description</string>
     <string name="save_bt">Save</string>
     <string name="empty_title_warning">Enter a task title</string>
+    <string name="delete_task">Delete task</string>
+    <string name="edit_task">Edit task</string>
+    <string name="message_dialog_delete">Do you want to delete this task?</string>
+    <string name="title_dialog_delete">Be careful</string>
+    <string name="positive_dialog_delete">Yep</string>
+    <string name="negative_dialog_delete">Nope</string>
 </resources>

@@ -29,15 +29,16 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     override fun getItemCount(): Int = tasks.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.fillData(tasks[position])
+        val task = tasks[position]
+        holder.fillData(task)
 
         holder.itemView.setOnClickListener {
-            mClickListener.onClick(position, holder.itemView)
+            mClickListener.onClick(task.id, holder.itemView)
         }
 
         holder.checkBox.setOnClickListener {
             holder.completeTask(holder.checkBox.isChecked)
-            mClickListener.onChecked(tasks[position].id, holder.itemView)
+            mClickListener.onChecked(task.id, holder.itemView)
         }
     }
 
@@ -76,7 +77,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     }
 
     interface OnItemClickListener {
-        fun onClick(position: Int, view: View?)
+        fun onClick(idTask: String, view: View?)
 
         fun onChecked(idTask: String, view: View?)
     }

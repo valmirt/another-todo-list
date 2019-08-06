@@ -57,9 +57,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapterTask.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
-            override fun onClick(position: Int, view: View?) {
+            override fun onClick(idTask: String, view: View?) {
                 val bundle = Bundle()
-                bundle.putInt(SELECTED_TASK, position)
+                bundle.putString(SELECTED_TASK, idTask)
                 findNavController().navigate(R.id.home_to_detail, bundle)
             }
 
