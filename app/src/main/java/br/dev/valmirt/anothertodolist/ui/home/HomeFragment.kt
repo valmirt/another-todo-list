@@ -38,14 +38,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapterTask.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
-            override fun onClick(position: Int, view: View?) {
-                val bundle = Bundle()
-                bundle.putInt(SELECTED_TASK, position)
-                findNavController().navigate(R.id.home_to_create, bundle)
-            }
-        })
-
         filter = preferences?.getString(LAST_LIST, ALL.toString())
             ?.toModelFilter() ?: ALL
 
@@ -63,6 +55,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapterTask.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
+            override fun onClick(position: Int, view: View?) {
+                val bundle = Bundle()
+                bundle.putInt(SELECTED_TASK, position)
+                findNavController().navigate(R.id.home_to_detail, bundle)
+            }
+
+            override fun onChecked(idTask: String, view: View?) {
+                viewModel.completedTask(idTask)
+            }
+        })
 
         task_list.layoutManager = LinearLayoutManager(context)
         task_list.setHasFixedSize(true)
@@ -91,6 +95,7 @@ class HomeFragment : Fragment() {
             if (it.isNotEmpty()) {
                 image_free.visibility = View.GONE
                 text_free.visibility = View.GONE
+                adapterTask.replaceData(it)
             } else {
                 image_free.visibility = View.VISIBLE
                 text_free.visibility = View.VISIBLE
@@ -102,7 +107,7 @@ class HomeFragment : Fragment() {
         })
 
         viewModel.alertMessage.observe(this, Observer {
-            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 

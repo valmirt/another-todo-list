@@ -54,7 +54,17 @@
         android:id="@+id/create_dest"
         android:name="br.dev.valmirt.anothertodolist.ui.home.create.CreateFragment"
         android:label="New Task"
-        tools:layout="@layout/fragment_create" />
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/create_to_home"
+            app:destination="@id/home_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/home_dest"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/detail_dest"
         android:name="br.dev.valmirt.anothertodolist.ui.home.detail.DetailFragment"

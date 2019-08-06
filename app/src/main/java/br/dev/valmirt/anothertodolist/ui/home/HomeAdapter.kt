@@ -1,5 +1,6 @@
 package br.dev.valmirt.anothertodolist.ui.home
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,24 +29,28 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     override fun getItemCount(): Int = tasks.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val task = tasks[position]
+        holder.fillData(tasks[position])
 
-        holder.fillData(task)
+        holder.itemView.setOnClickListener {
+            mClickListener.onClick(position, holder.itemView)
+        }
+
+        holder.checkBox.setOnClickListener {
+            holder.completeTask(holder.checkBox.isChecked)
+            mClickListener.onChecked(tasks[position].id, holder.itemView)
+        }
     }
 
     fun replaceData (data: List<Task>) {
         tasks.clear()
         tasks.addAll(data)
+        notifyDataSetChanged()
     }
 
     inner class HomeViewHolder (noteView: View)
-        : RecyclerView.ViewHolder(noteView), View.OnClickListener {
+        : RecyclerView.ViewHolder(noteView) {
 
-        init {
-            noteView.setOnClickListener(this)
-        }
-
-        private val checkBox = noteView.findViewById<CheckBox>(R.id.checkBox_task)
+        val checkBox: CheckBox = noteView.findViewById(R.id.checkBox_task)
         private val task = noteView.findViewById<TextView>(R.id.task_title)
         private val date = noteView.findViewById<TextView>(R.id.task_date)
 
@@ -53,14 +58,26 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             checkBox.isChecked = data.isComplete
             task.text = data.title
             date.text = data.date
+
+            completeTask(checkBox.isChecked)
         }
 
-        override fun onClick(v: View?) {
-            mClickListener.onClick(adapterPosition, v)
+        fun completeTask (isCompleted: Boolean) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (isCompleted) {
+                    task.setTextAppearance(R.style.TextPrimaryStyleChecked)
+                    date.setTextAppearance(R.style.TextSecondaryStyleChecked)
+                } else {
+                    task.setTextAppearance(R.style.TextPrimaryStyle)
+                    date.setTextAppearance(R.style.TextSecondaryStyle)
+                }
+            }
         }
     }
 
     interface OnItemClickListener {
         fun onClick(position: Int, view: View?)
+
+        fun onChecked(idTask: String, view: View?)
     }
 }

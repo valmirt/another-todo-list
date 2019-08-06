@@ -11,6 +11,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeViewModel : ViewModel(), KoinComponent {
 
@@ -27,10 +29,26 @@ class HomeViewModel : ViewModel(), KoinComponent {
             val response = taskRepository.getAllTasks()
 
             tasks.value = when(filter) {
-                ALL -> response.value
-                ACTIVE -> response.value.filter { !it.isComplete }
-                COMPLETED -> response.value.filter { it.isComplete }
+                ALL -> response.value.sortedByDescending { getDate(it.date) }
+                ACTIVE -> response.value
+                    .filter { !it.isComplete }
+                    .sortedByDescending { getDate(it.date) }
+                COMPLETED -> response.value
+                    .filter { it.isComplete }
+                    .sortedByDescending { getDate(it.date) }
             }
+
+            if(response.message.isNotEmpty())
+                alertMessage.value = response.message
+        }
+    }
+
+    private fun getDate(date: String) : Date =
+        SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(date)
+
+    fun completedTask (id: String) {
+        launchDataLoad {
+            val response = taskRepository.completeTask(id)
 
             if(response.message.isNotEmpty())
                 alertMessage.value = response.message
