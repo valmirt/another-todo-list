@@ -29,6 +29,10 @@
     <string name="positive_dialog_delete">Yep</string>
     <string name="negative_dialog_delete">Nope</string>
 
-    <string name="huge_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dignissim tellus ipsum. Sed ac libero sagittis, lacinia dui eget, facilisis metus. Aliquam volutpat posuere libero, sit amet convallis libero vestibulum in. Fusce quis sagittis elit. Vivamus eleifend tempor lorem sed fringilla. Fusce sit amet lacinia massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur auctor iaculis dolor, quis rhoncus augue auctor sed. Pellentesque sed pretium metus, at tincidunt justo. Maecenas ultrices at ex id placerat. Cras elit erat, fringilla non dolor at, scelerisque rhoncus dui. Quisque cursus erat hendrerit lectus tincidunt semper. Nulla ac lobortis lorem. Aenean eleifend nulla dignissim, finibus justo id, dictum tortor. Suspendisse potenti.</string>
-    <string name="default_description">No task description...</string>
+    <string name="huge_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dignissim tellus ipsum. Sed ac libero sagittis, lacinia dui eget, facilisis metus. Aliquam volutpat posuere libero, sit amet convallis libero vestibulum in. Fusce quis sagittis elit. Vivamus eleifend tempor lorem sed fringilla. Fusce sit amet lacinia massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur auctor iaculis dolor, quis rhoncus augue auctor sed. Pellentesque sed pretium metus, at tincidunt justo. Maecenas ultrices at ex id placerat.</string>
+    <string name="default_description">No task description…</string>
+    <string name="default_statistic">You have no tasks…</string>
+    <string name="total_statistic">Total of %1$s tasks, where:</string>
+    <string name="active_statistic">Active tasks: %.1f%%</string>
+    <string name="completed_statistic">Completed tasks: %.1f%%</string>
 </resources>

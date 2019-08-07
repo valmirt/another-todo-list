@@ -60,12 +60,12 @@
 
         <TextView
             android:id="@+id/detail_description"
-            style="@style/TextDescriptionStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:textSize="16sp"
             android:text="@string/default_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

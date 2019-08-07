@@ -36,8 +36,4 @@
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
-    <style name="TextDescriptionStyle">
-        <item name="android:textSize">@dimen/sizeTextPrimary</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
-    </style>
 </resources>
