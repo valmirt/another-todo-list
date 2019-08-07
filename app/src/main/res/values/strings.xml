@@ -35,4 +35,14 @@
     <string name="total_statistic">Total of %1$s tasks, where:</string>
     <string name="active_statistic">Active tasks: %.1f%%</string>
     <string name="completed_statistic">Completed tasks: %.1f%%</string>
+    <string name="customize">Customize</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="dark_theme_explain">Apply dark theme for this app</string>
+    <string name="support_us">Support us</string>
+    <string name="rate_us_string">Rate us</string>
+    <string name="rate_us_explain">Please take a moment to rate and review it in the Google Play Store</string>
+    <string name="share_with_friends">Share with friends</string>
+    <string name="share_explain">Support us y sharing the app with friends</string>
+    <string name="donate">Donate</string>
+    <string name="donate_explain">If you love this app, buy me a beer</string>
 </resources>
