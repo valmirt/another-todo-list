@@ -17,16 +17,28 @@ class DetailViewModel : ViewModel(), KoinComponent {
     val spinner: MutableLiveData<Boolean> = MutableLiveData()
     val alertMessage: MutableLiveData<String> = MutableLiveData()
     val task: MutableLiveData<Task> = MutableLiveData()
+    val deleted: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getTaskDetail(id: String) {
         launchDataLoad {
+            val response = taskRepository.getTask(id)
 
+            response.value?.let {
+                task.value = it
+            }
+
+            setErrorMessage(response.message)
         }
     }
 
-    fun deleteThisTask() {
+    fun deleteThisTask(id: String) {
         launchDataLoad {
+            val response = taskRepository.deleteTask(id)
+            response.value?.let {
+                deleted.value = true
+            }
 
+            setErrorMessage(response.message)
         }
     }
 
@@ -35,6 +47,12 @@ class DetailViewModel : ViewModel(), KoinComponent {
             spinner.value = true
             block()
             spinner.value = false
+        }
+    }
+
+    private fun setErrorMessage (message: String) {
+        if (message.isNotEmpty()) {
+            alertMessage.value = message
         }
     }
 }

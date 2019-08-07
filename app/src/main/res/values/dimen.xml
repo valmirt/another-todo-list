@@ -4,4 +4,5 @@
     <dimen name="sizeTextSecondary">12sp</dimen>
     <dimen name="sizeTextReference">14sp</dimen>
     <dimen name="sizeTextPrimary">16sp</dimen>
+    <dimen name="sizeTextTitle">20sp</dimen>
 </resources>

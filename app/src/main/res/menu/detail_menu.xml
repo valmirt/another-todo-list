@@ -6,9 +6,4 @@
         android:title="@string/delete_task"
         android:icon="@drawable/ic_delete"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/edit_button"
-        android:title="@string/edit_task"
-        android:icon="@drawable/ic_edit"
-        app:showAsAction="ifRoom"/>
 </menu>

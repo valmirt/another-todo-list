@@ -58,7 +58,7 @@
         <action
             android:id="@+id/create_to_home"
             app:destination="@id/home_dest"
-            app:enterAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"
@@ -69,5 +69,15 @@
         android:id="@+id/detail_dest"
         android:name="br.dev.valmirt.anothertodolist.ui.home.detail.DetailFragment"
         android:label="@string/detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/detail_to_home"
+            app:destination="@id/home_dest"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/home_dest"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

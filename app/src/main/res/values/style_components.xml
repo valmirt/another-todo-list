@@ -27,4 +27,17 @@
         <item name="android:textColor">@color/colorSplash</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="TextTitleStyle">
+        <item name="android:textSize">@dimen/sizeTextTitle</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+    <style name="TextDateStyle">
+        <item name="android:textSize">@dimen/sizeTextReference</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+    <style name="TextDescriptionStyle">
+        <item name="android:textSize">@dimen/sizeTextPrimary</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
 </resources>
