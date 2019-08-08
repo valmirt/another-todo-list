@@ -42,7 +42,14 @@
     <string name="rate_us_string">Rate us</string>
     <string name="rate_us_explain">Please take a moment to rate and review it in the Google Play Store</string>
     <string name="share_with_friends">Share with friends</string>
-    <string name="share_explain">Support us y sharing the app with friends</string>
+    <string name="share_explain">Support us sharing the app with friends</string>
     <string name="donate">Donate</string>
     <string name="donate_explain">If you love this app, buy me a beer</string>
+    <string name="database">Database</string>
+    <string name="clean_up_the_database">Clean up the Database</string>
+    <string name="clean_explain">Unregister all database tasks</string>
+    <string name="message_dialog_delete_all">Do you want to delete all tasks?</string>
+    <string name="delete_response">Deleted All tasks!</string>
+    <string name="share">Share Another To-Do List:</string>
+    <string name="share_message">Look this app:</string>
 </resources>

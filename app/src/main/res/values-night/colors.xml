@@ -12,8 +12,8 @@
     <color name="colorTextPrimary">#FFF</color>
     <color name="colorTextPrimaryOp50">#80FFFFFF</color>
 
-    <color name="colorTextSecondary">#F1F1F1</color>
-    <color name="colorTextSecondaryOp50">#80F1F1F1</color>
+    <color name="colorTextSecondary">#AFAFAF</color>
+    <color name="colorTextSecondaryOp50">#80AFAFAF</color>
 
     <color name="colorSpinner">#ffbf00</color>
     <color name="colorBackgroundSpinner">#303030</color>

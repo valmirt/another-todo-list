@@ -75,8 +75,8 @@ class TaskRepositoryImpl: TaskRepository, KoinComponent {
     override suspend fun deleteAllTasks(): Response<Boolean> = withContext(Dispatchers.IO) {
         taskDao.deleteAll()
         return@withContext when(getAllTasks().value.size) {
-            0 -> Response<Boolean>(false,  context.getString(R.string.delete_error))
-            else -> Response<Boolean>(true, "")
+            0 -> Response<Boolean>(true,  "")
+            else -> Response<Boolean>(false, context.getString(R.string.default_error))
         }
     }
 
@@ -87,7 +87,7 @@ class TaskRepositoryImpl: TaskRepository, KoinComponent {
             taskDao.deleteById(task?.id ?: "")
             Response<Task?>(task, "")
         } catch (e: Exception) {
-            Response<Task?>(null, e.message ?: context.getString(R.string.delete_error))
+            Response<Task?>(null, e.message ?: context.getString(R.string.default_error))
         }
     }
 
