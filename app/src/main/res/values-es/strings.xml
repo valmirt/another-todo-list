@@ -1,4 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- TODO -->
+
     <string name="app_name">Another To-Do List</string>
     <string name="logo">logo</string>
     <string name="tasks">Tasks</string>
@@ -6,9 +10,9 @@
 
 
     <string name="default_error">Something is wrong, try again…</string>
-    <string name="get_error">No task found</string>
-    <string name="save_error">Error saving task</string>
-    <string name="delete_error">Error deleting task</string>
+    <string name="get_error">No task found.</string>
+    <string name="save_error">Error saving task.</string>
+    <string name="delete_error">Error saving task.</string>
     <string name="no_tasks">No tasks</string>
     <string name="no_tasks_text">Nothing to do</string>
     <string name="create_task">Create a new task</string>

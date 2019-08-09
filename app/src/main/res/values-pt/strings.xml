@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Another To-Do List</string>
+    <string name="logo">logo</string>
+    <string name="tasks">Tarefas</string>
+    <string name="statistics">Estatística</string>
+
+
+    <string name="default_error">Algo deu errado, tente novamente…</string>
+    <string name="get_error">Tarefas não encontradas</string>
+    <string name="save_error">Erro ao salvar tarefa</string>
+    <string name="delete_error">Erro ao apagar tarefa</string>
+    <string name="no_tasks">Sem tarefas</string>
+    <string name="no_tasks_text">Nada a se fazer</string>
+    <string name="create_task">Criar nova tarefa</string>
+    <string name="filter_task_string">Filtro de tarefas</string>
+    <string name="all_string">Todos</string>
+    <string name="active_string">Ativos</string>
+    <string name="completed_string">Concluído</string>
+    <string name="settings">Configurações</string>
+    <string name="detail">Detalhe da tarefa</string>
+    <string name="task_title">Título</string>
+    <string name="task_description">Descrição</string>
+    <string name="save_bt">Salvar</string>
+    <string name="empty_title_warning">Insira o título da tarefa</string>
+    <string name="delete_task">Apagar tarefa</string>
+    <string name="edit_task">Editar tarefa</string>
+    <string name="message_dialog_delete">Você deseja apagar esta tarefa?</string>
+    <string name="title_dialog_delete">Atenção</string>
+    <string name="positive_dialog_delete">Sim</string>
+    <string name="negative_dialog_delete">Não</string>
+
+    <string name="huge_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dignissim tellus ipsum. Sed ac libero sagittis, lacinia dui eget, facilisis metus. Aliquam volutpat posuere libero, sit amet convallis libero vestibulum in. Fusce quis sagittis elit. Vivamus eleifend tempor lorem sed fringilla. Fusce sit amet lacinia massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur auctor iaculis dolor, quis rhoncus augue auctor sed. Pellentesque sed pretium metus, at tincidunt justo. Maecenas ultrices at ex id placerat.</string>
+    <string name="default_description">Tarefa sem descrição…</string>
+    <string name="default_statistic">Sem tarefas registradas…</string>
+    <string name="total_statistic">Total de %1$s tarefas, onde:</string>
+    <string name="active_statistic">Tarefas ativas: %.1f%%</string>
+    <string name="completed_statistic">Tarefas concluídas: %.1f%%</string>
+    <string name="customize">Customizar</string>
+    <string name="dark_theme">Tema escuro</string>
+    <string name="dark_theme_explain">Aplique o tema escuro para este app</string>
+    <string name="support_us">Apoie-nos</string>
+    <string name="rate_us_string">Nos avalie</string>
+    <string name="rate_us_explain">Por favor tire um momento para nos avaliar e escrever uma revisão no Google Play Store</string>
+    <string name="share_with_friends">Compartilhe com os amigos</string>
+    <string name="share_explain">Apoie-nos compartilhando este app com seus amigos</string>
+    <string name="donate">Donate</string>
+    <string name="donate_explain">If you love this app, buy me a beer</string>
+    <string name="database">Banco de dados</string>
+    <string name="clean_up_the_database">Limpe o banco de dados</string>
+    <string name="clean_explain">Apague todas as tarefas do banco de dados</string>
+    <string name="message_dialog_delete_all">Você deseja apagar todas as atividades?</string>
+    <string name="delete_response">Todas as atividades foram apagadas!</string>
+    <string name="share">Compartilhe Another To-Do List:</string>
+    <string name="share_message">Dê uma olhada neste app:</string>
+</resources>
