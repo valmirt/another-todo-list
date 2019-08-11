@@ -8,7 +8,7 @@ This is my Simple To-Do list app project using some Android Jetpack features. Si
 - Statistical data of active and completed tasks, and,
 - Dark Theme
 
-[Download]() for free and enjoy. :)
+[Download](http://play.google.com/store/apps/details?id=br.dev.valmirt.anothertodolist) for free and enjoy. :)
 
 ## Project structure
 
