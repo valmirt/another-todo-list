@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.dev.valmirt.anothertodolist.R
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     private val adapterTask = HomeAdapter()
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

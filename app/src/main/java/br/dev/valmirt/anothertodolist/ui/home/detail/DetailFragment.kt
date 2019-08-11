@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.dev.valmirt.anothertodolist.R
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.SELECTED_TASK
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 class DetailFragment : Fragment() {
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        ViewModelProvider(this).get(DetailViewModel::class.java)
     }
 
     private lateinit var idTask: String

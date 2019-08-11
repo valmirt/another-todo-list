@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import br.dev.valmirt.anothertodolist.R
 import br.dev.valmirt.anothertodolist.ToDoApplication
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.DARK_THEME
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 class SettingsFragment : Fragment() {
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+        ViewModelProvider(this).get(SettingsViewModel::class.java)
     }
 
     private val preferences: SharedPreferences? by lazy {
