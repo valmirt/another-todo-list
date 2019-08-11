@@ -49,7 +49,7 @@
     <string name="clean_up_the_database">Clean up the Database</string>
     <string name="clean_explain">Unregister all database tasks</string>
     <string name="message_dialog_delete_all">Do you want to delete all tasks?</string>
-    <string name="delete_response">Deleted All tasks!</string>
+    <string name="delete_response">Deleted all tasks!</string>
     <string name="share">Share Another To-Do List:</string>
     <string name="share_message">Look this app:</string>
 </resources>
