@@ -48,7 +48,7 @@ class SettingsViewModel: ViewModel(), KoinComponent {
     fun shareWithFriends(context: Context?) {
         val message = context?.getString(R.string.share_message) +
                 " " +
-                "market://details?id=$APP_NAME"
+                "http://play.google.com/store/apps/details?id=$APP_NAME"
 
         val intent = Intent()
         intent.type = "text/plain"
