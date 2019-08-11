@@ -7,10 +7,12 @@ import br.dev.valmirt.anothertodolist.model.Filter
 import br.dev.valmirt.anothertodolist.model.Filter.*
 import br.dev.valmirt.anothertodolist.model.Task
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
+import br.dev.valmirt.anothertodolist.utils.Constants.Companion.DATE_FORMAT
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,8 +45,15 @@ class HomeViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    private fun getDate(date: String) : Date =
-        SimpleDateFormat("yyyy/MM/dd", Locale.US).parse(date)
+    private fun getDate(date: String) : Date {
+        return try {
+            SimpleDateFormat(DATE_FORMAT, Locale.US).parse(date)
+        } catch (e: ParseException) {
+            alertMessage.value = e.message
+            Date()
+        }
+    }
+
 
     fun completedTask (id: String) {
         launchDataLoad {

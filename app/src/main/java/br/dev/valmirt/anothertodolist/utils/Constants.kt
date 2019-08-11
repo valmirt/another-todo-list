@@ -8,5 +8,6 @@ class Constants {
         const val SELECTED_THEME = "tc"
         const val LAST_LIST = "ll"
         const val SELECTED_TASK = "this"
+        const val DATE_FORMAT = "MMM dd, yyyy"
     }
 }
