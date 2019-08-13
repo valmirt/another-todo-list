@@ -48,7 +48,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class HomeViewHolder (noteView: View)
+    class HomeViewHolder (noteView: View)
         : RecyclerView.ViewHolder(noteView) {
 
         val checkBox: CheckBox = noteView.findViewById(R.id.checkBox_task)

@@ -1,36 +1,39 @@
 package br.dev.valmirt.anothertodolist.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import br.dev.valmirt.anothertodolist.base.BaseViewModel
 import br.dev.valmirt.anothertodolist.model.Filter
 import br.dev.valmirt.anothertodolist.model.Filter.*
 import br.dev.valmirt.anothertodolist.model.Task
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.DATE_FORMAT
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel : ViewModel(), KoinComponent {
+class HomeViewModel : BaseViewModel() {
+    private val _alertMessage = MutableLiveData<String>()
+    private val _spinner = MutableLiveData<Boolean>()
+    private val _tasks = MutableLiveData<List<Task>>()
 
     private val taskRepository: TaskRepository by inject()
 
-    val alertMessage: MutableLiveData<String> = MutableLiveData()
+    val alertMessage: LiveData<String>
+        get() = _alertMessage
 
-    val tasks: MutableLiveData<List<Task>> = MutableLiveData()
+    val tasks: LiveData<List<Task>>
+        get() = _tasks
 
-    val spinner: MutableLiveData<Boolean> = MutableLiveData()
+    val spinner: LiveData<Boolean>
+        get() = _spinner
 
     fun updateTaskList(filter: Filter = ALL) {
-        launchDataLoad {
+        launchDataLoad(_spinner) {
             val response = taskRepository.getAllTasks()
 
-            tasks.value = when(filter) {
+            _tasks.value = when(filter) {
                 ALL -> response.value.sortedByDescending { getDate(it.date) }
                 ACTIVE -> response.value
                     .filter { !it.isComplete }
@@ -40,8 +43,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
                     .sortedByDescending { getDate(it.date) }
             }
 
-            if(response.message.isNotEmpty())
-                alertMessage.value = response.message
+            setErrorMessage(response.message)
         }
     }
 
@@ -49,26 +51,22 @@ class HomeViewModel : ViewModel(), KoinComponent {
         return try {
             SimpleDateFormat(DATE_FORMAT, Locale.US).parse(date)
         } catch (e: ParseException) {
-            alertMessage.value = e.message
+            _alertMessage.value = e.message
             Date()
         }
     }
 
-
     fun completedTask (id: String) {
-        launchDataLoad {
+        launchDataLoad(_spinner) {
             val response = taskRepository.completeTask(id)
 
-            if(response.message.isNotEmpty())
-                alertMessage.value = response.message
+            setErrorMessage(response.message)
         }
     }
 
-    private fun launchDataLoad(block: suspend () -> Unit): Job {
-        return viewModelScope.launch {
-            spinner.value = true
-            block()
-            spinner.value = false
+    private fun setErrorMessage (message: String) {
+        if (message.isNotEmpty()) {
+            _alertMessage.value = message
         }
     }
 }

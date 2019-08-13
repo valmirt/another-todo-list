@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.dev.valmirt.anothertodolist.R
+import br.dev.valmirt.anothertodolist.base.BaseFragment
 
-class SplashFragment : Fragment() {
-
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(SplashViewModel::class.java)
-    }
+class SplashFragment :
+    BaseFragment<SplashViewModel> (SplashViewModel::class) {
 
     override fun onCreateView(
         inflater: LayoutInflater,

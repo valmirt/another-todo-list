@@ -3,40 +3,46 @@ package br.dev.valmirt.anothertodolist.ui.home.settings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.dev.valmirt.anothertodolist.R
+import br.dev.valmirt.anothertodolist.base.BaseViewModel
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.APP_NAME
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class SettingsViewModel: ViewModel(), KoinComponent {
-
-    private val taskRepository: TaskRepository by inject()
-
-    val alertMessage = MutableLiveData<String>()
-
-    val deleteResponse = MutableLiveData<Boolean>()
-
-    val hasTasks: MutableLiveData<Boolean> by lazy {
+class SettingsViewModel: BaseViewModel() {
+    private val _hasTasks: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>().also {
             viewModelScope.launch {
                 it.value = taskRepository.getAllTasks().value.isNotEmpty()
             }
         }
     }
+    private val _alertMessage = MutableLiveData<String>()
+    private val _deleteResponse = MutableLiveData<Boolean>()
+
+    val alertMessage: LiveData<String>
+        get() = _alertMessage
+
+    val deleteResponse: LiveData<Boolean>
+        get() = _deleteResponse
+
+    val hasTasks: LiveData<Boolean>
+        get() = _hasTasks
+
+    private val taskRepository: TaskRepository by inject()
 
     fun clearAllTasks() {
         viewModelScope.launch {
             val response = taskRepository.deleteAllTasks()
 
-            deleteResponse.value = response.value
+            _deleteResponse.value = response.value
 
             if (response.message.isNotEmpty())
-                alertMessage.value = response.message
+                _alertMessage.value = response.message
         }
     }
 

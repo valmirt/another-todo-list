@@ -9,15 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.dev.valmirt.anothertodolist.R
+import br.dev.valmirt.anothertodolist.base.BaseFragment
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.SELECTED_TASK
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 
-class DetailFragment : Fragment() {
-
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(DetailViewModel::class.java)
-    }
+class DetailFragment :
+    BaseFragment<DetailViewModel> (DetailViewModel::class) {
 
     private lateinit var idTask: String
 

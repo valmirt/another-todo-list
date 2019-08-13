@@ -3,18 +3,14 @@ package br.dev.valmirt.anothertodolist.ui.home.create
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.dev.valmirt.anothertodolist.R
+import br.dev.valmirt.anothertodolist.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create.*
 
-class CreateFragment : Fragment() {
-
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(CreateViewModel::class.java)
-    }
+class CreateFragment :
+    BaseFragment<CreateViewModel> (CreateViewModel::class) {
 
     private var wait: Boolean = false
 

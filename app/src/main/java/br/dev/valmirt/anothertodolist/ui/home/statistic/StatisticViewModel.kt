@@ -1,24 +1,32 @@
 package br.dev.valmirt.anothertodolist.ui.home.statistic
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.dev.valmirt.anothertodolist.base.BaseViewModel
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class StatisticViewModel: ViewModel(), KoinComponent {
+class StatisticViewModel: BaseViewModel() {
+    private val _emptyTasks = MutableLiveData<Boolean>()
+    private val _activeResult = MutableLiveData<Float>()
+    private val _totalResult = MutableLiveData<String>()
+    private val _completedResult = MutableLiveData<Float>()
 
     private val taskRepository: TaskRepository by inject()
 
-    val emptyTasks: MutableLiveData<Boolean> = MutableLiveData()
+    val emptyTasks: LiveData<Boolean>
+        get() = _emptyTasks
 
-    val activeResult: MutableLiveData<Float> = MutableLiveData()
+    val activeResult: LiveData<Float>
+        get() = _activeResult
 
-    val totalResult: MutableLiveData<String> = MutableLiveData()
+    val totalResult: LiveData<String>
+        get() = _totalResult
 
-    val completedResult: MutableLiveData<Float> = MutableLiveData()
+    val completedResult: LiveData<Float>
+        get() = _completedResult
 
     init {
         viewModelScope.launch {
@@ -27,11 +35,11 @@ class StatisticViewModel: ViewModel(), KoinComponent {
             val active = response.count { !it.isComplete }
 
 
-            if (total == 0) emptyTasks.value = true
+            if (total == 0) _emptyTasks.value = true
             else {
-                totalResult.value = total.toString()
-                activeResult.value = 100f * active / total
-                completedResult.value = 100f * (total - active) / total
+                _totalResult.value = total.toString()
+                _activeResult.value = 100f * active / total
+                _completedResult.value = 100f * (total - active) / total
             }
         }
     }

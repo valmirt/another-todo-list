@@ -2,12 +2,12 @@ package br.dev.valmirt.anothertodolist
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import br.dev.valmirt.anothertodolist.di.cacheModule
 import br.dev.valmirt.anothertodolist.di.dbModule
 import br.dev.valmirt.anothertodolist.di.repositoryModule
-import br.dev.valmirt.anothertodolist.utils.Constants.Companion.DARK_THEME
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.SELECTED_THEME
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -22,21 +22,16 @@ class ToDoApplication: Application() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-
-        private fun isAtLeastP() = Build.VERSION.SDK_INT >= 28
-        private fun isAtLeastL() = Build.VERSION.SDK_INT >= 21
     }
 
-    private val preferences: SharedPreferences by lazy {
-        getSharedPreferences(DARK_THEME, MODE_PRIVATE)
-    }
+    private val preferences: SharedPreferences by inject()
 
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
             androidContext(this@ToDoApplication)
-            modules(listOf(dbModule, repositoryModule))
+            modules(listOf(dbModule, repositoryModule, cacheModule))
         }
 
         val preference = preferences.getBoolean(SELECTED_THEME,  false)

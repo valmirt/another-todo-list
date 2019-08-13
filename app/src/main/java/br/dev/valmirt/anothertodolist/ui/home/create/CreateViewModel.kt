@@ -1,21 +1,25 @@
 package br.dev.valmirt.anothertodolist.ui.home.create
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.dev.valmirt.anothertodolist.base.BaseViewModel
 import br.dev.valmirt.anothertodolist.model.Task
 import br.dev.valmirt.anothertodolist.repository.TaskRepository
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class CreateViewModel : ViewModel(), KoinComponent {
+class CreateViewModel : BaseViewModel() {
+    private val _success = MutableLiveData<Boolean>()
+    private val _alertMessage = MutableLiveData<String>()
+
+    val alertMessage: LiveData<String>
+    get() = _alertMessage
+
+    val success: LiveData<Boolean>
+        get() = _success
 
     private val taskRepository: TaskRepository by inject()
-
-    val alertMessage: MutableLiveData<String> = MutableLiveData()
-
-    val success: MutableLiveData<Boolean> = MutableLiveData()
 
     fun saveNewTask(title: String, desc: String) {
         viewModelScope.launch {
@@ -23,12 +27,12 @@ class CreateViewModel : ViewModel(), KoinComponent {
                 Task(title = title, description = desc))
 
             response.value?.let {
-                success.value = true
+                _success.value = true
             }
 
             if (response.message.isNotEmpty()) {
-                alertMessage.value = response.message
-                success.value = false
+                _alertMessage.value = response.message
+                _success.value = false
             }
         }
     }
