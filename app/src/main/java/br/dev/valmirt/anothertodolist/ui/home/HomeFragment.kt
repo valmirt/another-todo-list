@@ -145,7 +145,7 @@ class HomeFragment :
                 }
                 title_list.text = filter.toTranslatedString(context)
 
-                val editor = preferences?.edit()
+                val editor = preferences.edit()
                 editor?.putString(LAST_LIST, filter.toString())
                 editor?.apply()
 

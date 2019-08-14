@@ -52,7 +52,7 @@ class SettingsFragment :
 
         val preference = preferences.getBoolean(SELECTED_THEME,  false)
 
-        dark_switch.isChecked = preference ?: false
+        dark_switch.isChecked = preference
 
         dark_switch.setOnCheckedChangeListener { _, isChecked ->
             val editor = preferences.edit()
