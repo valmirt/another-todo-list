@@ -38,7 +38,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
         holder.checkBox.setOnClickListener {
             holder.completeTask(holder.checkBox.isChecked)
-            mClickListener.onChecked(task.id, holder.itemView)
+            mClickListener.onChecked(task.id, it)
         }
     }
 
@@ -56,6 +56,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         private val date = noteView.findViewById<TextView>(R.id.task_date)
 
         fun fillData (data: Task) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                task.setTextAppearance(R.style.TextPrimaryStyle)
+                date.setTextAppearance(R.style.TextSecondaryStyle)
+            }
             checkBox.isChecked = data.isComplete
             task.text = data.title
             date.text = data.date

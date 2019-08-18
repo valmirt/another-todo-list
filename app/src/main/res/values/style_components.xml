@@ -3,6 +3,7 @@
     <style name="TextPrimaryStyle">
         <item name="android:textSize">@dimen/sizeTextPrimary</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textStyle">normal</item>
     </style>
     <style name="TextSecondaryStyle">
         <item name="android:textSize">@dimen/sizeTextSecondary</item>
