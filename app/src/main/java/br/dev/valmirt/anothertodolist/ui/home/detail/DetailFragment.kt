@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 
 class DetailFragment :
-    BaseFragment<DetailViewModel> (DetailViewModel::class) {
+    BaseFragment<DetailViewModel>(DetailViewModel::class) {
 
     private lateinit var idTask: String
 
@@ -38,18 +38,18 @@ class DetailFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.getTaskDetail(idTask)
 
-        viewModel.alertMessage.observe(this, Observer {
+        viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.task.observe(this, Observer {
+        viewModel.task.observe(viewLifecycleOwner, Observer {
             detail_title.text = it.title
             detail_date.text = it.date
             if (it.description.isNotEmpty())
                 detail_description.text = it.description
         })
 
-        viewModel.spinner.observe(this, Observer {
+        viewModel.spinner.observe(viewLifecycleOwner, Observer {
             if (it) {
                 loading_detail.visibility = View.VISIBLE
                 detail_layout.visibility = View.GONE
@@ -59,7 +59,7 @@ class DetailFragment :
             }
         })
 
-        viewModel.deleted.observe(this, Observer {
+        viewModel.deleted.observe(viewLifecycleOwner, Observer {
             if (it) findNavController().navigate(R.id.detail_to_home)
         })
     }
@@ -69,7 +69,7 @@ class DetailFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.delete_button -> {
                 context?.let {
                     AlertDialog.Builder(it).run {
@@ -78,7 +78,7 @@ class DetailFragment :
                         setPositiveButton(getString(R.string.positive_dialog_delete)) { _, _ ->
                             viewModel.deleteThisTask(idTask)
                         }
-                        setNegativeButton(getString(R.string.negative_dialog_delete)) { _, _ ->}
+                        setNegativeButton(getString(R.string.negative_dialog_delete)) { _, _ -> }
                         show()
                     }
                 }

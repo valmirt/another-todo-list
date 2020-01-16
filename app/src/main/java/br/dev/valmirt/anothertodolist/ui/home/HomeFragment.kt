@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 
 class HomeFragment :
-    BaseFragment<HomeViewModel> (HomeViewModel::class) {
+    BaseFragment<HomeViewModel>(HomeViewModel::class) {
 
     private lateinit var filter: Filter
 
@@ -56,7 +56,7 @@ class HomeFragment :
 
         setUpSwipeRefresh()
 
-        viewModel.tasks.observe(this, Observer {
+        viewModel.tasks.observe(viewLifecycleOwner, Observer {
             adapterTask.replaceData(it)
             if (it.isNotEmpty()) {
                 image_free.visibility = View.GONE
@@ -68,30 +68,24 @@ class HomeFragment :
             }
         })
 
-        viewModel.spinner.observe(this, Observer {
+        viewModel.spinner.observe(viewLifecycleOwner, Observer {
             refresh_home.isRefreshing = it
         })
 
-        viewModel.alertMessage.observe(this, Observer {
+        viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun setUpTaskList() {
-        adapterTask.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
-            override fun onClick(idTask: String, view: View?) {
-                val bundle = Bundle()
-                bundle.putString(SELECTED_TASK, idTask)
-                findNavController().navigate(R.id.home_to_detail, bundle)
-            }
+        adapterTask.itemClicked = {
+            val bundle = Bundle()
+            bundle.putString(SELECTED_TASK, it)
+            findNavController().navigate(R.id.home_to_detail, bundle)
+        }
 
-            override fun onChecked(idTask: String, view: View?) {
-                viewModel.completedTask(idTask)
-            }
-        })
-
+        adapterTask.itemChecked = { viewModel.completedTask(it) }
         task_list.layoutManager = LinearLayoutManager(context)
-        task_list.setHasFixedSize(true)
         task_list.adapter = adapterTask
 
         title_list.text = filter.toTranslatedString(context)
@@ -102,10 +96,12 @@ class HomeFragment :
             refresh_home.setColorSchemeColors(
                 ContextCompat.getColor(it, R.color.colorAccent),
                 ContextCompat.getColor(it, R.color.colorSpinner),
-                ContextCompat.getColor(it, R.color.colorPrimary))
+                ContextCompat.getColor(it, R.color.colorPrimary)
+            )
 
             refresh_home.setProgressBackgroundColorSchemeColor(
-                ContextCompat.getColor(it, R.color.colorBackgroundSpinner))
+                ContextCompat.getColor(it, R.color.colorBackgroundSpinner)
+            )
         }
 
 
@@ -119,7 +115,7 @@ class HomeFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.add_task -> {
                 findNavController().navigate(R.id.home_to_create)
                 true
@@ -138,7 +134,7 @@ class HomeFragment :
             menuInflater.inflate(R.menu.filter_tasks, menu)
 
             setOnMenuItemClickListener {
-                filter = when(it.itemId) {
+                filter = when (it.itemId) {
                     R.id.active -> ACTIVE
                     R.id.completed -> COMPLETED
                     else -> ALL

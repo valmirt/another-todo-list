@@ -10,7 +10,7 @@ import br.dev.valmirt.anothertodolist.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create.*
 
 class CreateFragment :
-    BaseFragment<CreateViewModel> (CreateViewModel::class) {
+    BaseFragment<CreateViewModel>(CreateViewModel::class) {
 
     private var wait: Boolean = false
 
@@ -27,14 +27,14 @@ class CreateFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.alertMessage.observe(this, Observer {
+        viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             wait = false
             edit_description.isEnabled = !wait
             edit_title.isEnabled = !wait
         })
 
-        viewModel.success.observe(this, Observer {
+        viewModel.success.observe(viewLifecycleOwner, Observer {
             if (it) findNavController().navigate(R.id.create_to_home)
         })
     }
@@ -44,7 +44,7 @@ class CreateFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.save_button -> {
                 if (edit_title.text.toString().isNotEmpty()) {
                     if (!wait) {
@@ -57,9 +57,11 @@ class CreateFragment :
                         edit_title.isEnabled = !wait
                     }
                 } else {
-                    Toast.makeText(context,
+                    Toast.makeText(
+                        context,
                         getString(R.string.empty_title_warning),
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 true
             }

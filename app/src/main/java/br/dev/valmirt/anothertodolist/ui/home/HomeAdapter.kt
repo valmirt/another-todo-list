@@ -13,11 +13,9 @@ import br.dev.valmirt.anothertodolist.model.Task
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     private val tasks = mutableListOf<Task>()
-    private lateinit var mClickListener: OnItemClickListener
+    var itemClicked: ((idTask: String) -> Unit)? = null
+    var itemChecked: ((idTask: String) -> Unit)? = null
 
-    fun setOnItemClickListener(cl: OnItemClickListener) {
-        mClickListener = cl
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val context = parent.context
@@ -33,29 +31,28 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         holder.fillData(task)
 
         holder.itemView.setOnClickListener {
-            mClickListener.onClick(task.id, holder.itemView)
+            itemClicked?.let { it(task.id) }
         }
 
         holder.checkBox.setOnClickListener {
             holder.completeTask(holder.checkBox.isChecked)
-            mClickListener.onChecked(task.id, it)
+            itemChecked?.let { it(task.id) }
         }
     }
 
-    fun replaceData (data: List<Task>) {
+    fun replaceData(data: List<Task>) {
         tasks.clear()
         tasks.addAll(data)
         notifyDataSetChanged()
     }
 
-    class HomeViewHolder (noteView: View)
-        : RecyclerView.ViewHolder(noteView) {
+    class HomeViewHolder(noteView: View) : RecyclerView.ViewHolder(noteView) {
 
         val checkBox: CheckBox = noteView.findViewById(R.id.checkBox_task)
         private val task = noteView.findViewById<TextView>(R.id.task_title)
         private val date = noteView.findViewById<TextView>(R.id.task_date)
 
-        fun fillData (data: Task) {
+        fun fillData(data: Task) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 task.setTextAppearance(R.style.TextPrimaryStyle)
                 date.setTextAppearance(R.style.TextSecondaryStyle)
@@ -67,7 +64,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             completeTask(checkBox.isChecked)
         }
 
-        fun completeTask (isCompleted: Boolean) {
+        fun completeTask(isCompleted: Boolean) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (isCompleted) {
                     task.setTextAppearance(R.style.TextPrimaryStyleChecked)
@@ -78,11 +75,5 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                 }
             }
         }
-    }
-
-    interface OnItemClickListener {
-        fun onClick(idTask: String, view: View?)
-
-        fun onChecked(idTask: String, view: View?)
     }
 }

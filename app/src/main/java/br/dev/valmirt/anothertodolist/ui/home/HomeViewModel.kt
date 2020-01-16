@@ -47,7 +47,7 @@ class HomeViewModel : BaseViewModel() {
         }
     }
 
-    private fun getDate(date: String) : Date {
+    private fun getDate(date: String) : Date? {
         return try {
             SimpleDateFormat(DATE_FORMAT, Locale.US).parse(date)
         } catch (e: ParseException) {

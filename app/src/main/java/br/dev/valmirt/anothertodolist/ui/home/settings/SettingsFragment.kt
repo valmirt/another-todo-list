@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
 
 class SettingsFragment :
-    BaseFragment<SettingsViewModel> (SettingsViewModel::class){
+    BaseFragment<SettingsViewModel>(SettingsViewModel::class) {
 
     private val preferences: SharedPreferences by inject()
 
@@ -31,15 +31,15 @@ class SettingsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.alertMessage.observe(this, Observer {
+        viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.hasTasks.observe(this, Observer {
+        viewModel.hasTasks.observe(viewLifecycleOwner, Observer {
             clear_all.isEnabled = it
         })
 
-        viewModel.deleteResponse.observe(this, Observer {
+        viewModel.deleteResponse.observe(viewLifecycleOwner, Observer {
             clear_all.isEnabled = !it
             if (!it) {
                 Toast.makeText(
@@ -50,7 +50,7 @@ class SettingsFragment :
             }
         })
 
-        val preference = preferences.getBoolean(SELECTED_THEME,  false)
+        val preference = preferences.getBoolean(SELECTED_THEME, false)
 
         dark_switch.isChecked = preference
 
@@ -71,7 +71,7 @@ class SettingsFragment :
                     setPositiveButton(getString(R.string.positive_dialog_delete)) { _, _ ->
                         viewModel.clearAllTasks()
                     }
-                    setNegativeButton(getString(R.string.negative_dialog_delete)) { _, _ ->}
+                    setNegativeButton(getString(R.string.negative_dialog_delete)) { _, _ -> }
                     show()
                 }
             }
