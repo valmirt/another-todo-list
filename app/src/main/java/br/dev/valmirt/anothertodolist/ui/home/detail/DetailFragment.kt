@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.dev.valmirt.anothertodolist.R
 import br.dev.valmirt.anothertodolist.base.BaseFragment
+import br.dev.valmirt.anothertodolist.model.Task
 import br.dev.valmirt.anothertodolist.utils.Constants.Companion.SELECTED_TASK
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -36,32 +35,46 @@ class DetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTaskDetail(idTask)
 
+        viewModel.getTaskDetail(idTask)
+        setupObservables()
+    }
+
+    private fun setupObservables() {
         viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.task.observe(viewLifecycleOwner, Observer {
-            detail_title.text = it.title
-            detail_date.text = it.date
-            if (it.description.isNotEmpty())
-                detail_description.text = it.description
+        viewModel.task.observe(viewLifecycleOwner, Observer { task ->
+            task?.let { fetchData(it) }
         })
 
-        viewModel.spinner.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                loading_detail.visibility = View.VISIBLE
-                detail_layout.visibility = View.GONE
-            } else {
-                loading_detail.visibility = View.GONE
-                detail_layout.visibility = View.VISIBLE
-            }
+        viewModel.spinner.observe(viewLifecycleOwner, Observer { isActive ->
+            isActive?.let { setupLoading(it) }
         })
 
-        viewModel.deleted.observe(viewLifecycleOwner, Observer {
-            if (it) findNavController().navigate(R.id.detail_to_home)
+        viewModel.deleted.observe(viewLifecycleOwner, Observer { isDeleted ->
+            isDeleted?.let { if (it) findNavController().navigate(R.id.detail_to_home) }
         })
+    }
+
+    private fun fetchData(task: Task) {
+        detail_title.text = task.title
+        detail_date.text = task.date
+        if (task.description.isNotEmpty()) {
+            detail_description.text = task.description
+        }
+    }
+
+
+    private fun setupLoading(isActive: Boolean) {
+        if (isActive) {
+            loading_detail.visibility = View.VISIBLE
+            detail_layout.visibility = View.GONE
+        } else {
+            loading_detail.visibility = View.GONE
+            detail_layout.visibility = View.VISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

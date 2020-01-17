@@ -23,20 +23,24 @@ class StatisticFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.emptyTasks.observe(viewLifecycleOwner, Observer {
-            if (it) default_text.visibility = View.VISIBLE
+        setupObservables()
+    }
+
+    private fun setupObservables() {
+        viewModel.emptyTasks.observe(viewLifecycleOwner, Observer { isEmpty ->
+            isEmpty?.let { if (it) default_text.visibility = View.VISIBLE }
         })
 
         viewModel.activeResult.observe(viewLifecycleOwner, Observer {
-            active_tasks.text = getString(R.string.active_statistic, it)
+            active_tasks.text = getString(R.string.active_statistic, it ?: 0F)
         })
 
         viewModel.completedResult.observe(viewLifecycleOwner, Observer {
-            completed_tasks.text = getString(R.string.completed_statistic, it)
+            completed_tasks.text = getString(R.string.completed_statistic, it ?: 0F)
         })
 
         viewModel.totalResult.observe(viewLifecycleOwner, Observer {
-            total_tasks.text = getString(R.string.total_statistic, it)
+            total_tasks.text = getString(R.string.total_statistic, it ?: "-")
         })
     }
 }

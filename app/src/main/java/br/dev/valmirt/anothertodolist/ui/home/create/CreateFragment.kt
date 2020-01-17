@@ -27,6 +27,10 @@ class CreateFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupObservables()
+    }
+
+    private fun setupObservables() {
         viewModel.alertMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             wait = false
@@ -34,8 +38,8 @@ class CreateFragment :
             edit_title.isEnabled = !wait
         })
 
-        viewModel.success.observe(viewLifecycleOwner, Observer {
-            if (it) findNavController().navigate(R.id.create_to_home)
+        viewModel.success.observe(viewLifecycleOwner, Observer { success ->
+            success?.let { if (it) findNavController().navigate(R.id.create_to_home) }
         })
     }
 

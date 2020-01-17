@@ -33,9 +33,7 @@ class HomeActivity: AppCompatActivity() {
             drawerLayout)
 
         setupActionBar(navController, appBarConfiguration)
-
         setupNavigationMenu(navController)
-
         setupBottomNavMenu(navController)
     }
 

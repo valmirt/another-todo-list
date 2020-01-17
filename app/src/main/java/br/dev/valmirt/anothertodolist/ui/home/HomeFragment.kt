@@ -52,19 +52,23 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpTaskList()
+        setupRecyclerview()
+        setupSwipeRefresh()
+        setupObservables()
+    }
 
-        setUpSwipeRefresh()
-
-        viewModel.tasks.observe(viewLifecycleOwner, Observer {
-            adapterTask.replaceData(it)
-            if (it.isNotEmpty()) {
-                image_free.visibility = View.GONE
-                text_free.visibility = View.GONE
+    private fun setupObservables() {
+        viewModel.tasks.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
                 adapterTask.replaceData(it)
-            } else {
-                image_free.visibility = View.VISIBLE
-                text_free.visibility = View.VISIBLE
+                if (it.isNotEmpty()) {
+                    image_free.visibility = View.GONE
+                    text_free.visibility = View.GONE
+                    adapterTask.replaceData(it)
+                } else {
+                    image_free.visibility = View.VISIBLE
+                    text_free.visibility = View.VISIBLE
+                }
             }
         })
 
@@ -77,7 +81,7 @@ class HomeFragment :
         })
     }
 
-    private fun setUpTaskList() {
+    private fun setupRecyclerview() {
         adapterTask.itemClicked = {
             val bundle = Bundle()
             bundle.putString(SELECTED_TASK, it)
@@ -91,7 +95,7 @@ class HomeFragment :
         title_list.text = filter.toTranslatedString(context)
     }
 
-    private fun setUpSwipeRefresh() {
+    private fun setupSwipeRefresh() {
         context?.let {
             refresh_home.setColorSchemeColors(
                 ContextCompat.getColor(it, R.color.colorAccent),
@@ -103,7 +107,6 @@ class HomeFragment :
                 ContextCompat.getColor(it, R.color.colorBackgroundSpinner)
             )
         }
-
 
         refresh_home.setOnRefreshListener {
             viewModel.updateTaskList(filter)
