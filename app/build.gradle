@@ -52,10 +52,10 @@ android {
 }
 
 dependencies {
-    def navigationVersion = "2.1.0"
+    def navigationVersion = "2.2.0"
     def room_version = '2.2.3'
     def koin_version = '2.0.1'
-    def lifecycle_version = '2.2.0-rc03'
+    def lifecycle_version = '2.2.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
